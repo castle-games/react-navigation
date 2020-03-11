@@ -23,6 +23,7 @@ import { BottomTabBarProps } from '../types';
 type Props = BottomTabBarProps & {
   activeTintColor?: string;
   inactiveTintColor?: string;
+  onLayout?: any;
 };
 
 const DEFAULT_TABBAR_HEIGHT = 50;
@@ -43,6 +44,7 @@ export default function BottomTabBar({
   keyboardHidesTabBar = false,
   labelPosition,
   labelStyle,
+  onLayout,
   showIcon,
   showLabel,
   style,
@@ -113,6 +115,9 @@ export default function BottomTabBar({
   }, [visible]);
 
   const handleLayout = (e: LayoutChangeEvent) => {
+    if (onLayout) {
+      onLayout(e);
+    }
     const { height, width } = e.nativeEvent.layout;
 
     setLayout(layout => {
